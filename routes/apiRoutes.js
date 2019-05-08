@@ -1,5 +1,3 @@
-/* eslint-disable quotes */
-/* eslint-disable prettier/prettier */
 var db = require("../models");
 
 module.exports = function (app) {

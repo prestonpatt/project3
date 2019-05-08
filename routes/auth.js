@@ -1,7 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable quotes */
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-unused-vars */
 var express = require('express');
 var app = express.Router();
 var passport = require('passport');
@@ -77,7 +73,6 @@ module.exports = function (app) {
     );
     
     function isLoggedIn(reg, res, next) {
-        // eslint-disable-next-line curly
         if (req.isAuthenticated())
             return next();
         res.redirect('/signin');

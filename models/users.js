@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable indent */
 module.exports = function(sequelize, DataTypes) {
     var Users = sequelize.define("Users", {
         id: {
@@ -20,14 +18,6 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             validate: {
                 isEmail: true,
-                
-            }
-        },
-        age: {
-            type: DataTypes.STRING,
-            // allowNull: false,
-            validate: {
-                isNumeric: true,
             }
         },
         password: {
