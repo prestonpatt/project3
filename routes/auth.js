@@ -54,9 +54,9 @@ module.exports = function (app) {
 
         console.log('this should be registering');
         db.Users.create({
-            name: req.body.name,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             email: req.body.email,
-            age: req.body.age,
             password: hash
         }).then(function (result) {
             res.json(result);

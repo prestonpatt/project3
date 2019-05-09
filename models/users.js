@@ -5,7 +5,15 @@ module.exports = function(sequelize, DataTypes) {
             autoIncrement: true,
             primaryKey: true,
         },
-        name: {
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 140],
+                is: /^[a-z]+$/i,
+            }
+        },
+        lastName: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
