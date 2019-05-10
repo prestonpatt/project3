@@ -13,7 +13,6 @@ const style = {
     transform: "translate(-50%, -50%)"
   },
   closeButton: {
-    fontSize: "2rem",
     position: "absolute",
     top: 10,
     right: 10,
@@ -21,7 +20,11 @@ const style = {
     width: 10,
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    padding: 10
+  },
+  h1: {
+    fontSize: "1.2rem"
   }
 };
 
@@ -29,9 +32,6 @@ const Modal = props => (
   <Fragment>
     {props.opened ? (
       <div style={style.container}>
-        <a onClick={props.onClose} href="#" style={style.closeButton}>
-          ×
-        </a>
         {props.children}
       </div>
     ) : null}
