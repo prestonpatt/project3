@@ -39,10 +39,6 @@ const SignIn = () => (
           <ErrorMessage name="firstName" component="div" />
           <Field type="text" name="lastName" placeholder="Last name" style={style.input} />
           <ErrorMessage name="lastName" component="div" />
-          <Field type="text" name="city" placeholder="City" style={style.input}  />
-          <ErrorMessage name="city" component="div" />
-          <Field type="text" name="state" placeholder="State" style={style.input} />
-          <ErrorMessage name="state" component="div" />
           <Field type="email" name="email" placeholder="Email" style={style.input}  />
           <ErrorMessage name="email" component="div" />
           <Field type="password" name="password" placeholder="Password" style={style.input} />
