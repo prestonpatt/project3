@@ -2,18 +2,14 @@ import React from 'react';
 import './App.css';
 import Nav from './components/Nav/Nav';
 import Modal from './components/Modal/Modal';
+import Master from './components/InfoForm/Master';
 import SignIn from './components/SignIn/SignIn';
-// import { Formik, Field, Form, ErrorMessage } from 'formik';
-// import * as Yup from 'yup';
+import InfoForm from './components/InfoForm/InfoForm';
 
-// const TodoSchema = Yup.object().shape({
-//   message: Yup.string().required('Message is required.')
-// });
 
 class App extends React.Component {
   state = {
-    modalOpened: true,
-    selectedTodo: null,
+    modalOpened: true
   }
 
   onModalClose = (e) => {
@@ -22,13 +18,6 @@ class App extends React.Component {
       console.log(prevState);
       return { modalOpened: !prevState.modalOpened };
     });
-  }
-
-  onTodoClick = (id) => {
-    this.setState({
-      modalOpened: true,
-      selectedTodo: id,
-    })
   }
 
   onSubmit = (values) => {
@@ -40,7 +29,9 @@ class App extends React.Component {
       <div>
         <Nav />
         <Modal opened={this.state.modalOpened} onClose={this.onModalClose}>
-          <SignIn />
+          {/* <InfoForm /> */}
+          {/* <SignIn /> */}
+          <Master />
         </Modal>
       </div>
     );
