@@ -1,27 +1,21 @@
 /* eslint-disable prettier/prettier */
 module.exports = function(sequelize, DataTypes) {
-  var Drinks = sequelize.define("drinks", {
+  var Zipcodes = sequelize.define("zipcodes", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
-    strDrink: DataTypes.STRING,
-    dateModified: DataTypes.STRING,
-    idDrink: DataTypes.INTEGER,
-    strAlcoholic: DataTypes.STRING,
-    strCategory: DataTypes.STRING,
-    strDrinkThumb: DataTypes.STRING,
-    strGlass: DataTypes.STRING,
-    strIBA: DataTypes.STRING,
-    strInstructions: DataTypes.TEXT,
-    strVideo: DataTypes.STRING
+    zip: DataTypes.INTEGER,
+    city: DataTypes.STRING,
+    state: DataTypes.STRING,
+    stateid: DataTypes.INTEGER,
   }, {
     timestamps: false
   });
 
-  Drinks.associate = function(models) {
-    Drinks.hasMany(models.ingredients); 
-  };
+  // Zipcodes.associate = function(models) {
+  //   Zipcodes.hasMany(models.stateTax); 
+  // };
 
-  return Drinks;
+  return Zipcodes;
 };
