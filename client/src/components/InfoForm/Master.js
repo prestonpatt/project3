@@ -19,7 +19,8 @@ class MasterForm extends React.Component {
     this.state = {
       currentStep: 1,
       email: '',
-      username: '',
+      firstName: '',
+      lastName: '',
       password: '',
       city: '',
       state: '',
@@ -91,8 +92,8 @@ class MasterForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const { email, username, password } = this.state
-    console.log(JSON.stringify({ email, username, password }))
+    const { email, firstName, lastName, password } = this.state
+    console.log(JSON.stringify({ email, firstName, lastName, password }))
   }
 
   render() {
