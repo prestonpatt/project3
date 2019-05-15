@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 module.exports = function(sequelize, DataTypes) {
   var Zipcodes = sequelize.define("zipcodes", {
     id: {
@@ -13,9 +12,10 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false
   });
 
-  // Zipcodes.associate = function(models) {
-  //   Zipcodes.hasMany(models.stateTax); 
-  // };
+  Zipcodes.associate = function(models) {
+    console.log(models)
+    Zipcodes.hasMany(models.statetax, {foreignKey: 'stateid', sourceKey: 'stateid'}); 
+  };
 
   return Zipcodes;
 };

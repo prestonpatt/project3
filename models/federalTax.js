@@ -11,8 +11,5 @@ module.exports = function (sequelize, DataTypes) {
     timestamps: false
   });
 
-  // FederalTax.associate = function (models) {
-  //   FederalTax.belongsTo(models.zipcodes);
-  // };
   return FederalTax;
 };
