@@ -3,8 +3,8 @@ import './App.css';
 import Nav from './components/Nav/Nav';
 import Modal from './components/Modal/Modal';
 import Master from './components/InfoForm/Master';
-import SignIn from './components/SignIn/SignIn';
-import InfoForm from './components/InfoForm/InfoForm';
+// import SignIn from './components/SignIn/SignIn';
+// import InfoForm from './components/InfoForm/InfoForm';
 
 
 class App extends React.Component {
@@ -21,8 +21,10 @@ class App extends React.Component {
   }
 
   onSubmit = (values) => {
-    alert(JSON.stringify(values));
+    console.log(JSON.stringify(values));
   }
+
+
 
   render() {
     return (
