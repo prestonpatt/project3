@@ -28,104 +28,42 @@ class MasterForm extends React.Component {
       bonus: '',
       otherIncome: ''
     }
-
-    this._next = this._next.bind(this)
-    this._prev = this._prev.bind(this)
-
-    // Bind the submission to handleChange() 
-    this.handleChange = this.handleChange.bind(this)
   }
 
-  _next() {
-    let currentStep = this.state.currentStep
-    // If the current step is 1 or 2, then add one on "next" button click
-    currentStep = currentStep >= 2? 3: currentStep + 1
+  handleStepOne = (values) => {
     this.setState({
-      currentStep: currentStep
+      ...values,
+      currentStep: 2
     })
   }
 
-  _prev() {
-    let currentStep = this.state.currentStep
-    // If the current step is 2 or 3, then subtract one on "previous" button click
-    currentStep = currentStep <= 1? 1: currentStep - 1
+  handleStepTwo = (values) => {
     this.setState({
-      currentStep: currentStep
+      ...values,
     })
-  }
-
-  get previousButton(){
-    let currentStep = this.state.currentStep;
-    // If the current step is not 1, then render the "previous" button
-    if(currentStep !==1){
-      return (
-        <button 
-          className="btn btn-secondary" 
-          type="button" onClick={this._prev}>
-        Previous
-        </button>
-      )
-    }
-    return null;
-  }
-  
-  get nextButton(){
-    let currentStep = this.state.currentStep;
-    if(currentStep <3){
-      return (
-        <button 
-          className="btn btn-primary float-right" 
-          type="button" onClick={this._next}>
-        Next
-        </button>        
-      )
-    }
-    return null;
-  }
-
-  handleChange(event) {
-    const { name, value } = event.target
-    this.setState({
-      [name]: value
-    })
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    const { email, firstName, lastName, password } = this.state
-    console.log(JSON.stringify({ email, firstName, lastName, password }))
   }
 
   render() {
+    const { currentStep } = this.state
     return (
       <React.Fragment>
         <h1 style={style.h1}>Enter Information below to sign in</h1>
 
-        <form onSubmit={this.handleSubmit}>
-
-          <StepOne
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            email={this.state.email}
-            username={this.state.username}
-            password={this.state.password}
-          />
+        {currentStep === 2 ? (
           <StepTwo
-            currentStep={this.state.currentStep}
-            handleChange={this.handleChange}
-            city={this.state.username}
-            state={this.state.state}
-            currentSalary={this.state.currentSalary}
-            bonus={this.state.bonus}
-            otherIncome={this.state.otherIncome}
+            onSubmit={this.handleStepTwo}
           />
-          {this.previousButton}
-          {this.nextButton}
-        </form>
+        ) : (
+          <StepOne
+            onSubmit={this.handleStepOne}
+          />
+        )}
+
 
       </React.Fragment>
     )
   }
 }
+
 
 export default MasterForm;

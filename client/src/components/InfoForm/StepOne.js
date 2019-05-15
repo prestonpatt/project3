@@ -1,4 +1,6 @@
 import React from 'react';
+import { Formik, Field, ErrorMessage, Form } from 'formik';
+import * as yup from "yup";
 
 const style = {
   h1: {
@@ -9,57 +11,36 @@ const style = {
   }
 }
 
+const userSchema = yup.object().shape({
+  name: yup.string().required(),
+  email: yup
+    .string()
+    .email()
+    .required(),
+  password: yup
+    .string()
+    .required()
+    .max(20)
+    .min(8)
+});
+
 class StepOne extends React.Component {
   render() {
-    if (this.props.currentStep !== 1) { // Prop: The current step
-      return null
-    }
     return (
-      <div className="form-group">
-        <input
-          style={style.input}
-          className="form-control"
-          id="firstName"
-          name="firstName"
-          type="text"
-          placeholder="Enter First Name"
-          value={this.props.firstName} // Prop: The username input data
-          onChange={this.props.handleChange} // Prop: Puts data into state
-        />
-        <input
-          style={style.input}
-          className="form-control"
-          id="lastName"
-          name="lastName"
-          type="text"
-          placeholder="Enter Last Name"
-          value={this.props.lastName} // Prop: The username input data
-          onChange={this.props.handleChange} // Prop: Puts data into state
-        />
-        {/* <label htmlFor="email">Email</label> */}
-        <input
-          style={style.input}
-          className="form-control"
-          id="email"
-          name="email"
-          type="text"
-          placeholder="Enter email"
-          value={this.props.email} // Prop: The email input data
-          onChange={this.props.handleChange} // Prop: Puts data into state
-        />
-        {/* <label htmlFor="email">Password</label> */}
-        <input
-          style={style.input}
-          className="form-control"
-          id="password"
-          name="password"
-          type="text"
-          placeholder="Enter password"
-          value={this.props.password} // Prop: The password input data
-          onChange={this.props.handleChange} // Prop: Puts data into state
-        />
-      </div>
-
+      <Formik  onSubmit={this.props.onSubmit} validationSchema={userSchema}>{() => (
+        <Form>
+        <ErrorMessage name="firstName" component="div" />
+        <Field type="text" name="firstName" placeholder="firstName" style={style.input} />
+        <ErrorMessage name="lastName" component="div" />
+        <Field type="text" name="lastName" placeholder="lastName" style={style.input} />
+        <ErrorMessage name="email" component="div" />
+        <Field type="text" name="email" placeholder="email" style={style.input} />
+        <ErrorMessage name="password" component="div" />
+        <Field type="text" name="password" placeholder="password" style={style.input} />
+        <button>Submit</button>
+        </Form>
+      )}
+      </Formik>
     )
   }
 }

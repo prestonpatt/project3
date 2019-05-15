@@ -31,7 +31,7 @@ const InfoForm = () => (
                 }, 400);
             }}
         >
-            {({ isSubmitting }) => (
+            {({ isSubmitting, fields }) => (
                 <Form>
                     <ErrorMessage name="city" component="div" />
                     <Field type="text" name="city" placeholder="City" style={style.input} />
