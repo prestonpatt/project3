@@ -1,19 +1,17 @@
 module.exports = function (sequelize, DataTypes) {
-  var StateTax = sequelize.define("stateTax", {
+  var StateTax = sequelize.define("statetax", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
     state: DataTypes.STRING,
     rate: DataTypes.DECIMAL,
-    income: DataTypes.INTEGER
+    income: DataTypes.INTEGER,
+    stateid: DataTypes.INTEGER
 
   }, {
     timestamps: false
   });
 
-  // StateTax.associate = function (models) {
-  //   StateTax.belongsTo(models.zipcodes);
-  // };
-  // return StateTax;
+  return StateTax;
 };

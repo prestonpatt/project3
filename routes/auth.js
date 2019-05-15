@@ -8,7 +8,7 @@ var db = require('../models');
 module.exports = function (app) {
     passport.use(new LocalStrategy(
         function (username, password, done) {
-            db.Users.findOne(
+            db.users.findOne(
                 {
                     where: {
                         email: username
@@ -39,7 +39,7 @@ module.exports = function (app) {
     });
 
     passport.deserializeUser(function (id, done) {
-        db.Users.findOne(
+        db.users.findOne(
             {
                 where: {
                     id: id
@@ -53,7 +53,8 @@ module.exports = function (app) {
         var hash = bcrypt.hashSync(req.body.password, 10);
 
         console.log('this should be registering');
-        db.Users.create({
+        console.log(db.users);
+        db.users.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
