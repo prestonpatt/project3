@@ -19,7 +19,8 @@ class MasterForm extends React.Component {
     this.state = {
       currentStep: 1,
       email: '',
-      username: '',
+      firstName: '',
+      lastName: '',
       password: '',
       city: '',
       state: '',
