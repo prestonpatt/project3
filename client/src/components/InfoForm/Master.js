@@ -22,8 +22,7 @@ class MasterForm extends React.Component {
       firstName: '',
       lastName: '',
       password: '',
-      city: '',
-      state: '',
+      zipCode: '',
       currentSalary: '',
       bonus: '',
       otherIncome: ''
@@ -35,6 +34,7 @@ class MasterForm extends React.Component {
       ...values,
       currentStep: 2
     })
+    console.log("yo")
   }
 
   handleStepTwo = (values) => {

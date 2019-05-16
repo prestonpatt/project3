@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, ErrorMessage, Field } from 'formik';
+import * as yup from "yup";
 
 const style = {
     h1: {
@@ -10,23 +11,28 @@ const style = {
     }
 }
 
+const userSchema = yup.object().shape({
+    zipCode: yup.string().required().max(5).min(5),
+    currentSalary: yup.number().required(),
+    bonus: yup.number().required(),
+    otherIncome: yup.number()
+});
+
 class StepTwo extends React.Component {
     render() {
         return (
-            <Formik  onSubmit={this.props.onSubmit}>{() => (
-                    <Form>
-                        <ErrorMessage name="city" component="div" />
-                        <Field type="text" name="city" placeholder="City" style={style.input} />
-                        <ErrorMessage name="state" component="div" />
-                        <Field type="text" name="state" placeholder="State" style={style.input} />
-                        <ErrorMessage name="currentSalary" component="div" />
-                        <Field type="text" name="currentSalary" placeholder="Current Salary $" style={style.input} />
-                        <ErrorMessage name="bonus" component="div" />
-                        <Field type="text" name="bonus" placeholder="Bonus $" style={style.input} />
-                        <ErrorMessage name="otherIncome" component="div" />
-                        <Field type="text" name="otherIncome" placeholder="Other Income" style={style.input} />
-                        <button>Submit</button>
-                    </Form>
+            <Formik onSubmit={this.props.onSubmit} validationSchema={userSchema}>{() => (
+                <Form>
+                    <ErrorMessage name="zipCode" component="div" />
+                    <Field type="number" name="zipCode" placeholder="Zip Code" style={style.input} />
+                    <ErrorMessage name="currentSalary" component="div" />
+                    <Field type="number" name="currentSalary" placeholder="Current Salary $" style={style.input} />
+                    <ErrorMessage name="bonus" component="div" />
+                    <Field type="number" name="bonus" placeholder="Bonus $" style={style.input} />
+                    <ErrorMessage name="otherIncome" component="div" />
+                    <Field type="number" name="otherIncome" placeholder="Other Income" style={style.input} />
+                    <button type="submit">Submit</button>
+                </Form>
             )}</Formik>
         )
     }

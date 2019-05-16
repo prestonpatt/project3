@@ -12,7 +12,8 @@ const style = {
 }
 
 const userSchema = yup.object().shape({
-  name: yup.string().required(),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
   email: yup
     .string()
     .email()
@@ -34,10 +35,10 @@ class StepOne extends React.Component {
         <ErrorMessage name="lastName" component="div" />
         <Field type="text" name="lastName" placeholder="lastName" style={style.input} />
         <ErrorMessage name="email" component="div" />
-        <Field type="text" name="email" placeholder="email" style={style.input} />
+        <Field type="email" name="email" placeholder="email" style={style.input} />
         <ErrorMessage name="password" component="div" />
-        <Field type="text" name="password" placeholder="password" style={style.input} />
-        <button>Submit</button>
+        <Field type="password" name="password" placeholder="password" style={style.input} />
+        <button type="submit">Submit</button>
         </Form>
       )}
       </Formik>
