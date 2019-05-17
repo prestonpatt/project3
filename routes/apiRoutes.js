@@ -37,4 +37,17 @@ module.exports = function (app) {
     });
     // res.status(200)
   });
+  
+  app.post("/api/userinfo/:drinkId", function (req, res) {
+    db.drinks.findOne({
+      where: {
+        id: req.params.drinkId
+      },
+      include: [db.ingredients]
+    }).then(function (result) {
+      res.json(result);
+    });
+    // res.status(200)
+  });
+  
 };

@@ -51,14 +51,18 @@ module.exports = function (app) {
 
     app.post('/register', function (req, res, next) {
         var hash = bcrypt.hashSync(req.body.password, 10);
-
+        console.log(req.body)
         console.log('this should be registering');
         console.log(db.users);
         db.users.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password: hash
+            password: hash,
+            zipCode: req.body.zipCode,
+            currentSalary: req.body.currentSalary,
+            bonus: req.body.bonus,
+            otherIncome: req.body.otherIncome,
         }).then(function (result) {
             res.json(result);
         });
