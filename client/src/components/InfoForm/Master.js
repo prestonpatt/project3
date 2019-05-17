@@ -41,7 +41,31 @@ class MasterForm extends React.Component {
     this.setState({
       ...values,
     })
+    fetch('/register', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        zipCode: this.state.zipCode,
+        password: this.state.password,
+        currentSalary: this.state.currentSalary,
+        bonus: this.state.bonus,
+        otherIncome: this.state.otherIncome,
+      })
+    })
+      .then(user => {
+        if (user) {
+          this.props.loadUser(user)
+          this.props.onRouteChange('home');
+        }
+      })
   }
+
+  // onSubmitStepTwo = () => {
+    
+  // }
 
   render() {
     const { currentStep } = this.state
@@ -52,6 +76,7 @@ class MasterForm extends React.Component {
         {currentStep === 2 ? (
           <StepTwo
             onSubmit={this.handleStepTwo}
+            
           />
         ) : (
           <StepOne
