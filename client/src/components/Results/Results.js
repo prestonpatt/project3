@@ -9,6 +9,8 @@ const data01 = [
 ];
 
 class Results extends React.Component {
+
+    componentDidMount
     render() {
         return (
             <Jumbotron>

@@ -41,26 +41,9 @@ class MasterForm extends React.Component {
     this.setState({
       ...values,
     })
-    fetch('/register', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-        zipCode: this.state.zipCode,
-        password: this.state.password,
-        currentSalary: this.state.currentSalary,
-        bonus: this.state.bonus,
-        otherIncome: this.state.otherIncome,
-      })
-    })
-      .then(user => {
-        if (user) {
-          this.props.loadUser(user)
-          this.props.onRouteChange('home');
-        }
-      })
+    //send values to POST /api/record -> after it responds with new record id:
+    //chanage the window.location to /results/:id
+    // in the resgit ults.js component - call /api/records/:id to retrieve saved information
   }
 
   // onSubmitStepTwo = () => {
