@@ -8,7 +8,8 @@ const style = {
   },
   input: {
     margin: 10
-  }
+  },
+
 }
 
 const userSchema = yup.object().shape({
@@ -31,9 +32,9 @@ class StepOne extends React.Component {
       <Formik  onSubmit={this.props.onSubmit} validationSchema={userSchema}>{() => (
         <Form>
         <ErrorMessage name="firstName" component="div" />
-        <Field type="text" name="firstName" placeholder="firstName" style={style.input} />
+        <Field type="text" name="firstName" placeholder="First Name" style={style.input} />
         <ErrorMessage name="lastName" component="div" />
-        <Field type="text" name="lastName" placeholder="lastName" style={style.input} />
+        <Field type="text" name="lastName" placeholder="Last Name" style={style.input} />
         <ErrorMessage name="email" component="div" />
         <Field type="email" name="email" placeholder="email" style={style.input} />
         <ErrorMessage name="password" component="div" />

@@ -12,7 +12,7 @@ const style = {
 }
 
 const userSchema = yup.object().shape({
-    zipCode: yup.string().required().max(5).min(5),
+    zipCode: yup.number().required().max(5).min(5),
     currentSalary: yup.number().required(),
     bonus: yup.number().required(),
     otherIncome: yup.number()
