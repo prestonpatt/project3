@@ -46,6 +46,10 @@ class MasterForm extends React.Component {
     // in the resgit ults.js component - call /api/records/:id to retrieve saved information
   }
 
+  // onSubmitStepTwo = () => {
+    
+  // }
+
   render() {
     const { currentStep } = this.state
     return (
@@ -56,6 +60,7 @@ class MasterForm extends React.Component {
         {currentStep === 2 ? (
           <StepTwo
             onSubmit={this.handleStepTwo}
+            
           />
         ) : (
             <StepOne
