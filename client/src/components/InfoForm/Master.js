@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from '../Modal/Modal';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
+import UserInfo from '../UserInfo/UserInfo';
 
 const style = {
   h1: {
@@ -44,10 +45,37 @@ class MasterForm extends React.Component {
     //send values to POST /api/record -> after it responds with new record id:
     //chanage the window.location to /results/:id
     // in the resgit ults.js component - call /api/records/:id to retrieve saved information
+    fetch('/api/record', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        zipCode: this.state.zipCode,
+        password: this.state.password,
+        currentSalary: this.state.currentSalary,
+        bonus: this.state.bonus,
+        otherIncome: this.state.otherIncome,
+      })
+    })
+        .then(response => response.json())
+        .then(user => {
+          console.log(user);
+          if (user && user.id) {
+            // this.props.loadUser(user)
+            window.location.href = `/results/${user.id}`;
+          }
+          else {
+            //show some error and not go to results page
+          }
+        })
+    console.log(values)
   }
 
+
   // onSubmitStepTwo = () => {
-    
+
   // }
 
   render() {
@@ -60,7 +88,7 @@ class MasterForm extends React.Component {
         {currentStep === 2 ? (
           <StepTwo
             onSubmit={this.handleStepTwo}
-            
+
           />
         ) : (
             <StepOne

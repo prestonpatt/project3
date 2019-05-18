@@ -48,8 +48,12 @@ module.exports = function (app) {
                 done(err, user);
             });
     });
+    app.get('/api/record', function (req, res, next) {
+        console.log('Hello world');
+        res.json('Hello world');
+    });
 
-    app.post('/register', function (req, res, next) {
+    app.post('/api/record', function (req, res, next) {
         var hash = bcrypt.hashSync(req.body.password, 10);
         console.log(req.body)
         console.log('this should be registering');

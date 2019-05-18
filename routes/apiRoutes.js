@@ -8,7 +8,7 @@ module.exports = function (app) {
   app.get("/api/drinks", function (req, res) {
     var options = {};
 
-    
+
     if (req.query.attributes) {
       options.attributes = req.query.attributes.split(",");
     }
@@ -19,7 +19,7 @@ module.exports = function (app) {
     if (req.query.find) {
       options.include = {
         model: db.ingredients,
-        where: {strName: { like: '%' + req.query.find + '%' }}
+        where: { strName: { like: '%' + req.query.find + '%' } }
       };
     }
 
@@ -29,18 +29,18 @@ module.exports = function (app) {
   }),
 
 
-  app.get("/api/user/id", function (req, res) {
-    db.users.findOne({
-      where: {
-        id: req.params.id
-      },
-      // include: [db.ingredients]
-    }).then(function (result) {
-      res.json(result);
+    app.get("/api/user/id", function (req, res) {
+      db.users.findOne({
+        where: {
+          id: req.params.id
+        },
+        // include: [db.ingredients]
+      }).then(function (result) {
+        res.json(result);
+      });
+      // res.status(200)
     });
-    // res.status(200)
-  });
-  
+
   app.post("/api/userinfo/:drinkId", function (req, res) {
     db.drinks.findOne({
       where: {
@@ -52,8 +52,8 @@ module.exports = function (app) {
     });
     // res.status(200)
   });
-  
-  app.put("/api/user", function(req, res) {
+
+  app.put("/api/record", function (req, res) {
     db.users.update(req.body,
       {
         where: {
@@ -64,15 +64,15 @@ module.exports = function (app) {
         bonus: req.body.bonus,
         otherIncome: req.body.otherIncome,
       })
-      .then(function(result) {
+      .then(function (result) {
         res.json(result);
       });
   });
 
-  axios
-    .get(queryURL).then(function(response) {
-      console.log(response);
-    });
+  // axios
+  //   .get(queryURL).then(function (response) {
+  //     console.log(response);
+  //   });
 };
 
 // /register

@@ -27,7 +27,24 @@ class App extends React.Component {
     console.log(JSON.stringify(values));
   }
 
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        firstName: data.firstName,
+        email: data.email
+      }
+    })
+  }
 
+  onRouteChange = (route) => {
+    if (route === 'signout') {
+      this.setState({ isSignedIn: false })
+    } else if (route === 'home') {
+      this.setState({ isSignedIn: true })
+    }
+    this.setState({ route: route });
+  }
 
   render() {
     return (
