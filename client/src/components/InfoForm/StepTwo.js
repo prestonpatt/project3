@@ -12,10 +12,10 @@ const style = {
 }
 
 const userSchema = yup.object().shape({
-    zipCode: yup.number().required().max(5).min(5),
+    zipCode: yup.number().required(),
     currentSalary: yup.number().required(),
     bonus: yup.number().required(),
-    otherIncome: yup.number()
+    otherIncome: yup.number().required()
 });
 
 class StepTwo extends React.Component {
