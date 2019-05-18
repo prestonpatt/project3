@@ -1,4 +1,7 @@
 var db = require("../models");
+var axios = require("axios");
+const API_KEY = process.env.NUMBEOKEY
+var queryURL = "http://www.numbeo.com:8008/api/cities?api_key=" + API_KEY + "&query=" + "Dallas"
 
 module.exports = function (app) {
   // Get all examples
@@ -26,12 +29,12 @@ module.exports = function (app) {
   }),
 
 
-  app.get("/api/drinks/:drinkId", function (req, res) {
-    db.drinks.findOne({
+  app.get("/api/user/id", function (req, res) {
+    db.users.findOne({
       where: {
-        id: req.params.drinkId
+        id: req.params.id
       },
-      include: [db.ingredients]
+      // include: [db.ingredients]
     }).then(function (result) {
       res.json(result);
     });
@@ -50,4 +53,28 @@ module.exports = function (app) {
     // res.status(200)
   });
   
+  app.put("/api/user", function(req, res) {
+    db.users.update(req.body,
+      {
+        where: {
+          id: req.body.id
+        },
+        zipCode: req.body.zipCode,
+        currentSalary: req.body.currentSalary,
+        bonus: req.body.bonus,
+        otherIncome: req.body.otherIncome,
+      })
+      .then(function(result) {
+        res.json(result);
+      });
+  });
+
+  axios
+    .get(queryURL).then(function(response) {
+      console.log(response);
+    });
 };
+
+// /register
+// /signin
+// /user
