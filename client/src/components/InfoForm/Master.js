@@ -41,6 +41,9 @@ class MasterForm extends React.Component {
     this.setState({
       ...values,
     })
+    //send values to POST /api/record -> after it responds with new record id:
+    //chanage the window.location to /results/:id
+    // in the resgit ults.js component - call /api/records/:id to retrieve saved information
   }
 
   render() {
