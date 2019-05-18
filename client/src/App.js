@@ -2,9 +2,12 @@ import React from 'react';
 import './App.css';
 import Nav from './components/Nav/Nav';
 import Modal from './components/Modal/Modal';
-import Master from './components/InfoForm/Master';
-// import SignIn from './components/SignIn/SignIn';
-// import InfoForm from './components/InfoForm/InfoForm';
+import Master from './components/InfoForm/Master'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Results from './components/Results/Results';
+import LogIn from './components/LogIn/LogIn';
+import UserInfo from './components/UserInfo/UserInfo';
+import Splash from './components/Splash/Splash';
 
 
 class App extends React.Component {
@@ -12,13 +15,13 @@ class App extends React.Component {
     modalOpened: true
   }
 
-  onModalClose = (e) => {
-    e.preventDefault();
-    this.setState((prevState) => {
-      console.log(prevState);
-      return { modalOpened: !prevState.modalOpened };
-    });
-  }
+  // onModalClose = (e) => {
+  //   e.preventDefault();
+  //   this.setState((prevState) => {
+  //     console.log(prevState);
+  //     return { modalOpened: !prevState.modalOpened };
+  //   });
+  // }
 
   onSubmit = (values) => {
     console.log(JSON.stringify(values));
@@ -28,14 +31,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Nav />
-        <Modal opened={this.state.modalOpened} onClose={this.onModalClose}>
-          {/* <InfoForm /> */}
-          {/* <SignIn /> */}
-          <Master />
-        </Modal>
-      </div>
+      <Router>
+        <div>
+          <Nav />
+          <Switch>
+            <Route exact path='/splash' component={Splash}></Route>
+            <Route exact path="/register" component={Master} />
+            <Route exact path="/signin" component={LogIn} />
+            <Route exact path="/results/:id" component={Results} />
+            <Route exact path="/user" component={UserInfo} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
