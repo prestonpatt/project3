@@ -10,7 +10,12 @@ const data01 = [
 
 class Results extends React.Component {
 
-    componentDidMount
+    componentDidMount() {
+        fetch()
+          .then(response => response.json())
+          .then(data => this.setState({ data }));
+      }
+
     render() {
         return (
             <Jumbotron>
