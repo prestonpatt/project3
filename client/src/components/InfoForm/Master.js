@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from '../Modal/Modal';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 
@@ -34,7 +35,6 @@ class MasterForm extends React.Component {
       ...values,
       currentStep: 2
     })
-    console.log("yo")
   }
 
   handleStepTwo = (values) => {
@@ -70,6 +70,7 @@ class MasterForm extends React.Component {
   render() {
     const { currentStep } = this.state
     return (
+
       <React.Fragment>
         <h1 style={style.h1}>Enter Information below to sign in</h1>
 
@@ -79,11 +80,10 @@ class MasterForm extends React.Component {
             
           />
         ) : (
-          <StepOne
-            onSubmit={this.handleStepOne}
-          />
-        )}
-
+            <StepOne
+              onSubmit={this.handleStepOne}
+            />
+          )}
 
       </React.Fragment>
     )
