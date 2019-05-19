@@ -52,7 +52,7 @@ class App extends React.Component {
         <div>
           <Nav />
           <Switch>
-            <Route exact path='/splash' component={Splash}></Route>
+            <Route exact path='/' component={Splash}></Route>
             <Route exact path="/register" component={Master} />
             <Route exact path="/signin" component={LogIn} />
             <Route exact path="/results/:id" component={Results} />

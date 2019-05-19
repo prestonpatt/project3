@@ -48,9 +48,20 @@ module.exports = function (app) {
                 done(err, user);
             });
     });
-    app.get('/api/record', function (req, res, next) {
-        console.log('Hello world');
-        res.json('Hello world');
+    app.get('/api/record/:id', function (req, res, next) {
+        db.users.findOne({
+            where: {
+              id: req.params.id
+            },
+            // include: [db.ingredients]
+          }).then(function (result) {
+            res.json(result);
+          });
+          // res.status(200)
+        
+        
+        // console.log('Hello world');
+        // res.json('Hello world');
     });
 
     app.post('/api/record', function (req, res, next) {
