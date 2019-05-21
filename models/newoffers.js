@@ -1,18 +1,10 @@
 module.exports = function (sequelize, DataTypes) {
-    var UserInfo = sequelize.define("userinfo", {
-      id: {
+    var NewOffers = sequelize.define("newoffers", {
+      zipCode: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-      },
-      city: {
-        type: DataTypes.STRING,
         allowNull: false,
       },
-      state: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      income: {
+      currentSalary: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -20,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      other: {
+      otherIncome: {
         type: DataTypes.INTEGER,
         allowNull: false,
       }
@@ -28,5 +20,10 @@ module.exports = function (sequelize, DataTypes) {
       timestamps: false
     });
   
-    return UserInfo;
+    NewOffers.associate = function(models) {
+      console.log(models)
+      NewOffers.belongsTo(models.users, {foreignKey: 'id', sourceKey: 'id'}); 
+    };
+
+    return NewOffers;
   };
