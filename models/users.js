@@ -52,5 +52,10 @@ module.exports = function(sequelize, DataTypes) {
     {
         timestamps: false
     });
+
+    Users.associate = function(models) {
+        console.log(models)
+        Users.hasMany(models.newoffers, {foreignKey: 'id', sourceKey: 'id'}); 
+      };
     return Users;
 };

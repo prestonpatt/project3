@@ -27,18 +27,45 @@ class Results extends React.Component {
         super(props)
 
         this.state = {
-            user: {}
+            user: {},
+            newzip: {}
         }
     }
 
     componentDidMount() {
-        Axios
-            .get(`/api/record/${this.props.match.params.id}`).then((res) => {
-                if (res) { this.setState({ user: res.data }) }
-                console.log(res.data)
-                // console.log(this.state)
+        Axios.get(`/api/record/${this.props.match.params.id}`)
+            .then((res) => {
+                if (res) {
+                    this.setState({
+                        user: res.data
+                    })
+                }
+                return Axios.get(`/api/zipCodes/${this.state.user.zipCode}`)
+                    .then((zipres) => {
+                        if (zipres) {
+                        // console.log("This is zipres " + JSON.stringify(zipres))
+                        this.setState({
+                            newzip: zipres.data
+                        })
+                    }
+                    console.log(this.state.user)
+                    console.log(this.state.newzip)
+                    }
+                    )
             })
     }
+
+    // .then(Axios.spread((recres, zipres) => {
+    //     this.setState({
+    //         user: recres.data,
+    //         new: zipres.data
+    //     })
+    //     console.log("This is recres: " + JSON.stringify(recres.data))
+    //     console.log("This is zipres: " + zipres.data)
+    // })
+    // )
+// }
+
 
     render() {
         const user = this.state.user;
