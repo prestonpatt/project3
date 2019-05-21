@@ -83,8 +83,6 @@ class MasterForm extends React.Component {
     return (
 
       <React.Fragment>
-        <h1 style={style.h1}>Enter Information below to sign in</h1>
-
         {currentStep === 2 ? (
           <StepTwo
             onSubmit={this.handleStepTwo}
