@@ -35,7 +35,7 @@ class Splash extends React.Component {
     }
     render() {
         return (
-            <div style={{backgroundImage: "url(" + Background1 + ")", height: "100%", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
+            <div style={{backgroundImage: "url(" + Background1 + ")", height: '100vh', width:"100vw", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
                 {this.state.showModal ?
                     <Modal opened='true' onClose={this.hideModal} ><Master onFinish={this.hideModal}/></Modal>
                     : null}
