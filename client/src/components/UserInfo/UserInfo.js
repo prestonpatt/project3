@@ -34,7 +34,7 @@ class UserInfo extends React.Component {
                 <h1>Here are your results, {`${ this.state.user.firstName }`}</h1>
                 <ul>
                     <li>{`${ this.state.user.email }`}</li>
-                    <li>{`${ this.state.user.zipCode }`}</li>
+                    <li>{`${ this.state.user.zip }`}</li>
                     <li>{`${ this.state.user.currentSalary }`}</li>
                     <li>{`${ this.state.user.bonus }`}</li>
                     <li>{`${ this.state.user.otherIncome }`}</li>

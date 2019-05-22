@@ -74,7 +74,7 @@ module.exports = function (app) {
             lastName: req.body.lastName,
             email: req.body.email,
             password: hash,
-            zipCode: req.body.zipCode,
+            zip: req.body.zip,
             currentSalary: req.body.currentSalary,
             bonus: req.body.bonus,
             otherIncome: req.body.otherIncome,

@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        zipCode: {
+        zip: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
@@ -55,7 +55,8 @@ module.exports = function(sequelize, DataTypes) {
 
     Users.associate = function(models) {
         console.log(models)
-        Users.hasMany(models.newoffers, {foreignKey: 'id', sourceKey: 'id'}); 
+        Users.hasMany(models.newoffers, {foreignKey: 'id', sourceKey: 'id'});
+        Users.belongsTo(models.zipcodes, {foreignKey: 'zip', sourceKey: 'zip'}) 
       };
     return Users;
 };
