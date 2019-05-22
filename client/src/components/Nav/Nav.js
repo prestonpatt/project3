@@ -19,7 +19,7 @@ const styles = {
 const Nav = () => (
   <nav style={styles.nav}>
     <a href="">
-      <h1 style={styles.h1}>Logo/Name goes here</h1>
+      <h1 style={styles.h1}>Is it worth it?</h1>
     </a>
   </nav>
 );
