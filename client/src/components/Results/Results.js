@@ -1,7 +1,7 @@
 import React from 'react';
 // import Jumbotron from 'react-bootstrap/Jumbotron';
 // import Button from 'react-bootstrap/Jumbotron';
-import { PieChart, Pie, Tooltip, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
+import { PieChart, Pie, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
 import Axios from 'axios';
 import { Container, Row, Col } from 'react-grid-system';
 // import UserInfo from '../UserInfo/UserInfo';
@@ -19,6 +19,9 @@ const style = {
     },
     columns: {
         border: "solid"
+    },
+    numbeoText: {
+        textAlign: "right"
     }
 }
 
@@ -30,6 +33,10 @@ class Results extends React.Component {
             user: {},
             newzip: {}
         }
+    }
+
+    numToPercent(num, per) {
+        return (num/100)*per
     }
 
     componentDidMount() {
@@ -99,6 +106,7 @@ class Results extends React.Component {
                 name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
             },
         ];
+
         
         return (
 
@@ -111,6 +119,11 @@ class Results extends React.Component {
                 <Row>
                     <Col md={6} style={style.columns}>
                         <h1 style={style.h1}>Current Salary</h1>
+                        <ul>
+                            <li>Here is your current salary {`${this.state.user.currentSalary}`}</li>
+                            <li>Here is your bonus {`${this.state.user.bonus}`}</li>
+                            <li>Here is your other income {`${this.state.user.otherIncome}`}</li>
+                        </ul>
                         <PieChart width={400} height={400}>
                             <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={80} fill="red" label />
                             <Tooltip />
@@ -118,6 +131,11 @@ class Results extends React.Component {
                     </Col>
                     <Col md={6} style={style.columns}>
                         <h1 style={style.h1}>New Job</h1>
+                        <ul>
+                            <li>Here is your current salary {`${this.state.user.newCurrentSalary}`}</li>
+                            <li>Here is your bonus {`${this.state.user.newBonus}`}</li>
+                            <li>Here is your other income {`${this.state.user.newOtherIncome}`}</li>
+                        </ul>
                         <PieChart width={500} height={500}>
                             <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={80} fill="blue" label />
                             <Tooltip />
@@ -125,9 +143,9 @@ class Results extends React.Component {
                     </Col>
                 </Row>
                 <Row style={style.columns}>
-                    <Col md={4}></Col>
-                    <Col md={4}>
+                    <Col md={12}>
                         <h1 style={style.h1}>Numbeo Data</h1>
+                        <p style={{textAlign: 'right'}}></p>
                         <BarChart
                             width={500}
                             height={300}
@@ -145,7 +163,6 @@ class Results extends React.Component {
                             <Bar dataKey="uv" fill="#82ca9d" />
                         </BarChart>
                     </Col>
-                    <Col md={4}></Col>
                 </Row>
 
 

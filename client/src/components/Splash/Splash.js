@@ -1,10 +1,15 @@
 import React from 'react';
 import Modal from '../Modal/Modal';
 import Master from '../InfoForm/Master';
+import Background1 from '../../background1.jpg'
 
 const style = {
-    h1: {
-        fontSize: "1.2rem"
+    button: {
+        marginTop: 5
+    },
+    background: {
+        height: 100,
+        width: 100
     }
 }
 
@@ -30,13 +35,12 @@ class Splash extends React.Component {
     }
     render() {
         return (
-            <div>
-                <h1 style={style.h1}> Welcome To ... click start to begin register process</h1>
+            <div style={{backgroundImage: "url(" + Background1 + ")", height: "100%", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
                 {this.state.showModal ?
                     <Modal opened='true' onClose={this.hideModal} ><Master onFinish={this.hideModal}/></Modal>
                     : null}
                 <div>
-                    <button onClick={this.showModal}>Start</button>
+                    <button style={style.button} onClick={this.showModal}>Click start to begin register process</button>
                 </div>
             </div>
         )

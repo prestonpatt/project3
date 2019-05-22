@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Nav from './components/Nav/Nav';
-import Modal from './components/Modal/Modal';
 import Master from './components/InfoForm/Master'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Results from './components/Results/Results';
@@ -14,14 +13,6 @@ class App extends React.Component {
   state = {
     modalOpened: true
   }
-
-  // onModalClose = (e) => {
-  //   e.preventDefault();
-  //   this.setState((prevState) => {
-  //     console.log(prevState);
-  //     return { modalOpened: !prevState.modalOpened };
-  //   });
-  // }
 
   onSubmit = (values) => {
     console.log(JSON.stringify(values));
