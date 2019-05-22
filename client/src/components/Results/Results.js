@@ -21,6 +21,8 @@ const style = {
         border: "solid"
     }
 }
+const API_KEY = process.env.NUMBEOKEY
+var queryURL = "http://www.numbeo.com:8008/api/indices?api_key=" + API_KEY + "&query="
 
 class Results extends React.Component {
     constructor(props) {
@@ -28,9 +30,13 @@ class Results extends React.Component {
 
         this.state = {
             user: {},
-            newzip: {}
+            newzip: {},
+            federal: {},
+            numbeo: {},
         }
     }
+
+   
 
     componentDidMount() {
         Axios.get(`/api/record/${this.props.match.params.id}`)
@@ -39,68 +45,73 @@ class Results extends React.Component {
                     this.setState({
                         user: res.data
                     })
-                }
-                return Axios.get(`/api/zipCodes/${this.state.user.zipCode}`)
-                    .then((zipres) => {
-                        if (zipres) {
-                        // console.log("This is zipres " + JSON.stringify(zipres))
-                        this.setState({
-                            newzip: zipres.data
-                        })
-                    }
                     console.log(this.state.user)
-                    console.log(this.state.newzip)
-                    }
-                    )
-            })
-    }
+                }
+                return Axios.get(`/api/zip/${this.state.user.zip}`)
+                    .then((res) => {
+                        if (res) {
+                            console.log("This is zipres " + JSON.stringify(res))
+                            this.setState({
+                                newzip: res.data
+                            })
+                            console.log(this.state.newzip)
+                            
+                        }
+                                return Axios.get(queryURL + this.state.user.zip.state)
+                                    .then((response) => {
+                                        console.log(this.state.user)
+                                        if (response) {
+                                            console.log("This is numbeo" + JSON.stringify(response.data))
+                                            this.setState({
+                                                numbeo: response.data
+                                            })
+                                        }
+                                        return Axios.get(`/api/federaltax/`) 
+                                    });
+                                }
+                            )
+                    })
+            }
 
-    // .then(Axios.spread((recres, zipres) => {
-    //     this.setState({
-    //         user: recres.data,
-    //         new: zipres.data
-    //     })
-    //     console.log("This is recres: " + JSON.stringify(recres.data))
-    //     console.log("This is zipres: " + zipres.data)
-    // })
-    // )
-// }
 
 
     render() {
-        const user = this.state.user;
+                    const user = this.state.user;
+                    const newzip = this.state.newzip;
+                    const numbeo = this.state.numbeo;
+                    const takeHome = user.currentSalary + user.bonus + user.otherIncome;
+                    const stateTaxRate = newzip.statetaxes ? newzip.statetaxes[0].rate : null;
+                    const federalTaxRate = 0;
+                    const data01 = [
+                        { name: 'Take Home Pay', value: 100 - stateTaxRate }, { name: 'Federal Tax', value: 0 },
+                        { name: 'State Tax', value: stateTaxRate },
+                    ];
 
-        const data01 = [
-            { name: 'Group A', value: user.currentSalary + user.bonus + user.otherIncome }, { name: 'Group B', value: 300 },
-            { name: 'Group C', value: 0 }, { name: 'Group D', value: 200 },
-            { name: 'Group E', value: 278 }, { name: 'Group F', value: 189 },
-        ];
+                    const data = [
+                        {
+                            name: user.firstName, uv: 4000, pv: 2400, amt: 2400,
+                        },
+                        {
+                            name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
+                        },
+                        {
+                            name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
+                        },
+                        {
+                            name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
+                        },
+                        {
+                            name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
+                        },
+                        {
+                            name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
+                        },
+                        {
+                            name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
+                        },
+                    ];
 
-        const data = [
-            {
-                name: user.firstName, uv: 4000, pv: 2400, amt: 2400,
-            },
-            {
-                name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
-            },
-            {
-                name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
-            },
-            {
-                name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
-            },
-            {
-                name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
-            },
-            {
-                name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
-            },
-            {
-                name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
-            },
-        ];
-        
-        return (
+                    return(
 
             <Container>
                 <Row>
@@ -149,7 +160,7 @@ class Results extends React.Component {
                 </Row>
 
 
-            </Container>
+            </Container >
         )
     }
 }

@@ -4,8 +4,8 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
-    income: DataTypes.INTEGER,
     rate: DataTypes.DECIMAL,
+    income: DataTypes.INTEGER,
 
   }, {
     timestamps: false

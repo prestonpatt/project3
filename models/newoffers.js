@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
     var NewOffers = sequelize.define("newoffers", {
-      zipCode: {
+      zip: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },

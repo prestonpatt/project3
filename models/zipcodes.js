@@ -15,6 +15,7 @@ module.exports = function(sequelize, DataTypes) {
   Zipcodes.associate = function(models) {
     console.log(models)
     Zipcodes.hasMany(models.statetax, {foreignKey: 'stateid', sourceKey: 'stateid'}); 
+    Zipcodes.hasMany(models.users, {foreignKey: 'zip', sourceKey: 'zip'})
   };
 
   return Zipcodes;

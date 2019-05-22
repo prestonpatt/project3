@@ -24,7 +24,7 @@ class MasterForm extends React.Component {
       firstName: '',
       lastName: '',
       password: '',
-      zipCode: '',
+      zip: '',
       currentSalary: '',
       bonus: '',
       otherIncome: ''
@@ -52,7 +52,7 @@ class MasterForm extends React.Component {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         email: this.state.email,
-        zipCode: this.state.zipCode,
+        zip: this.state.zip,
         password: this.state.password,
         currentSalary: this.state.currentSalary,
         bonus: this.state.bonus,
