@@ -1,7 +1,7 @@
 {
   "name": "node-handlebars-boilerplate",
   "version": "1.0.0",
-  "description": "Project 2 Starter",
+  "description": "Project 3node",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -32,5 +32,8 @@
     "chai-http": "^4.0.0",
     "cross-env": "^5.2.0",
     "mocha": "^5.2.0"
+  },
+  "engines": {
+    "node": "8.11.4"
   }
 }
