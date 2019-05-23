@@ -1,4 +1,6 @@
 require("dotenv").config();
+const path = require("path");
+const router = require("express").Router();
 
 
 var express = require("express");
@@ -18,6 +20,11 @@ app.use(express.static("client/build"));
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/auth")(app);
+router.use(function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
+
 
 var syncOptions = { force: false };
 

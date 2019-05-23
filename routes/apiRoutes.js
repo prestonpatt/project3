@@ -42,6 +42,7 @@ module.exports = function (app) {
     });
   });
 
+  
   app.put("/api/record", function (req, res) {
     db.users.update(req.body,
       {
