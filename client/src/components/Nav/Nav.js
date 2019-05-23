@@ -2,9 +2,9 @@ import React from "react";
 
 const styles = {
   nav: {
-    fontSize: "1rem",
+    fontSize: 20,
     padding: "1.5em 2.5em",
-    backgroundColor: "lightgreen",
+    backgroundColor: " #19a974",
   },
   h1: {
     textTransform: "uppercase",
@@ -19,7 +19,7 @@ const styles = {
 const Nav = () => (
   <nav style={styles.nav}>
     <a href="">
-      <h1 style={styles.h1}>Is it worth it?</h1>
+      <h1 style={styles.h1}>Worth it?</h1>
     </a>
   </nav>
 );
