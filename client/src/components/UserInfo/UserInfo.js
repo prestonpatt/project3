@@ -20,12 +20,7 @@ class UserInfo extends React.Component {
     }
     
     render() {
-        const user = this.state.user;
-        const data01 = [
-            { name: 'Group A', value: user.currentSalary + user.bonus + user.otherIncome }, { name: 'Group B', value: 300 },
-            { name: 'Group C', value: 0 }, { name: 'Group D', value: 200 },
-            { name: 'Group E', value: 278 }, { name: 'Group F', value: 189 },
-        ];
+        
         return (
             
             <Jumbotron>

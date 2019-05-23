@@ -1,7 +1,7 @@
 import React from 'react';
 // import Jumbotron from 'react-bootstrap/Jumbotron';
 // import Button from 'react-bootstrap/Jumbotron';
-import { PieChart, Pie, Tooltip, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
+import { PieChart, Pie, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
 import Axios from 'axios';
 import { Container, Row, Col } from 'react-grid-system';
 import Background1 from '../../background1.jpg'

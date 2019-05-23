@@ -29,7 +29,7 @@ const style = {
     <Fragment>
       {props.opened ? (
         <div style={style.container}>
-          <a href="#" style={style.closeButton}>
+          <a href="/results" style={style.closeButton}>
             ×
           </a>
           {props.children}
