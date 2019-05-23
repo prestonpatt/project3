@@ -1,11 +1,15 @@
 import React from 'react';
 import Modal from '../Modal/Modal';
 import Master from '../InfoForm/Master';
-import Background1 from '../../background1.jpg'
+import Background3 from '../../background3.jpg'
 
 const style = {
     button: {
-        marginTop: 5
+        margin: 5,
+        color: "white",
+        backgroundColor: "#19a974",
+        borderColor: " #19a974",
+        padding: 5,
     },
     background: {
         height: 100,
@@ -35,7 +39,7 @@ class Splash extends React.Component {
     }
     render() {
         return (
-            <div style={{backgroundImage: "url(" + Background1 + ")", height: '100vh', width:"100vw", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
+            <div style={{backgroundImage: "url(" + Background3 + ")", height: '100vh', width:"100vw", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
                 {this.state.showModal ?
                     <Modal opened='true' onClose={this.hideModal} ><Master onFinish={this.hideModal}/></Modal>
                     : null}
