@@ -29,7 +29,7 @@ class MasterForm extends React.Component {
       currentSalary: '',
       bonus: '',
       otherIncome: '',
-      newZipCode: '',
+      newZipcode: '',
       newCurrentSalary: '',
       newBonus: '',
       newOtherIncome: ''
@@ -68,7 +68,7 @@ class MasterForm extends React.Component {
         currentSalary: this.state.currentSalary,
         bonus: this.state.bonus,
         otherIncome: this.state.otherIncome,
-        newZipCode: this.state.newZipCode,
+        newZipcode: this.state.newZipcode,
         newCurrentSalary: this.state.newCurrentSalary,
         newBonus: this.state.newBonus,
         newOtherIncome: this.state.newOtherIncome

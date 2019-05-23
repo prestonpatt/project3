@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
   
     NewOffers.associate = function(models) {
       console.log(models)
-      NewOffers.belongsTo(models.users, {foreignKey: 'id', sourceKey: 'id'}); 
+      // NewOffers.belongsTo(models.users, {foreignKey: 'id', sourceKey: 'id'}); 
     };
 
     return NewOffers;
