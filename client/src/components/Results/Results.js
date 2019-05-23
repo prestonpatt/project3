@@ -89,25 +89,25 @@ class Results extends React.Component {
 
         const data = [
             {
-                name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
+                name: 'Page A', uv: 100, pv: 20, amt: 2400,
             },
             {
-                name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
+                name: 'Page B', uv: 100, pv: 50, amt: 2210,
             },
             {
-                name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
+                name: 'Page C', uv: 100, pv: 50, amt: 2290,
             },
             {
-                name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
+                name: 'Page D', uv: 200, pv: 80, amt: 2000,
             },
             {
-                name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
+                name: 'Page E', uv: 100, pv: 40, amt: 2181,
             },
             {
-                name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
+                name: 'Page F', uv: 10, pv: 100, amt: 2500,
             },
             {
-                name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
+                name: 'Page G', uv: 200, pv: 200, amt: 2100,
             },
         ];
 
@@ -122,6 +122,11 @@ class Results extends React.Component {
                     <Row>
                         <Col md={6} style={style.columns}>
                             <h4 style={style.h4}>Current Salary</h4>
+                            <ul>
+                                <li>Your take home pay is: {}</li>
+                                <li>You’ll pay {} federal taxes</li>
+                                <li>You’ll pay {} state taxes</li>
+                            </ul>
                             <PieChart width={400} height={400}>
                                 <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={80} fill="#8884d8" label />
                                 <Tooltip />
@@ -129,6 +134,11 @@ class Results extends React.Component {
                         </Col>
                         <Col md={6} style={style.columns}>
                             <h4 style={style.h4}>New Job</h4>
+                            <ul>
+                                <li>Your take home pay is: {}</li>
+                                <li>You’ll pay {} federal taxes</li>
+                                <li>You’ll pay {} state taxes</li>
+                            </ul>
                             <PieChart width={500} height={500}>
                                 <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={80} fill="#82ca9d" label />
                                 <Tooltip />
@@ -140,7 +150,7 @@ class Results extends React.Component {
                             <h4 style={style.h4}>Numbeo Data</h4>
                             <BarChart
                                 width={500}
-                                height={300}
+                                height={400}
                                 data={data}
                                 margin={{
                                     top: 5, right: 30, left: 20, bottom: 5,
@@ -148,7 +158,7 @@ class Results extends React.Component {
                             >
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="name" />
-                                <YAxis />
+                                <YAxis type="number" domain={[0, 'dataMax']} />
                                 <Tooltip />
                                 <Legend />
                                 <Bar dataKey="uv" fill="#8884d8" />
@@ -156,7 +166,12 @@ class Results extends React.Component {
                             </BarChart>
                         </Col>
                         <Col md={4}>
-                            <h4 style={style.h4}>Text will Go here</h4>
+                            <h4 style={{textAlign:"left"}}>Text will Go here</h4>
+                            <ul>
+                                <li>Your take home pay is: {}</li>
+                                <li>You’ll pay {} federal taxes</li>
+                                <li>You’ll pay {} state taxes</li>
+                            </ul>
                         </Col>
                     </Row>
                 </Container >
