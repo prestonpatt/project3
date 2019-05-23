@@ -24,13 +24,13 @@ class StepTwo extends React.Component {
             <Formik onSubmit={this.props.onSubmit} validationSchema={userSchema}>{() => (
                 <Form>
                     <ErrorMessage name="zip" component="div" />
-                    <Field type="number" name="zip" placeholder="Zip Code" style={style.input} />
+                    <Field type="number" name="zip" placeholder="Current ZIP Code" style={style.input} />
                     <ErrorMessage name="currentSalary" component="div" />
                     <Field type="number" name="currentSalary" placeholder="Current Salary $" style={style.input} />
                     <ErrorMessage name="bonus" component="div" />
                     <Field type="number" name="bonus" placeholder="Bonus $" style={style.input} />
                     <ErrorMessage name="otherIncome" component="div" />
-                    <Field type="number" name="otherIncome" placeholder="Other Income" style={style.input} />
+                    <Field type="number" name="otherIncome" placeholder="Additional Income $" style={style.input} />
                     <button type="submit">Submit</button>
                 </Form>
             )}</Formik>

@@ -7,10 +7,11 @@ const style = {
     button: {
         margin: 5,
         color: "white",
-        backgroundColor: "#19a974",
-        borderColor: " #19a974",
+        backgroundColor: "#5A8465",
+        borderColor: " #5A8465",
         padding: 5,
     },
+    
     background: {
         height: 100,
         width: 100
@@ -44,7 +45,7 @@ class Splash extends React.Component {
                     <Modal opened='true' onClose={this.hideModal} ><Master onFinish={this.hideModal}/></Modal>
                     : null}
                 <div>
-                    <button style={style.button} onClick={this.showModal}>Click start to begin register process</button>
+                    <button style={style.button} onClick={this.showModal}>Click here to register!</button>
                 </div>
             </div>
         )

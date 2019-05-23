@@ -53,22 +53,13 @@ module.exports = function (app) {
             where: {
               id: req.params.id
             },
-            // include: [db.ingredients]
           }).then(function (result) {
             res.json(result);
           });
-          // res.status(200)
-        
-        
-        // console.log('Hello world');
-        // res.json('Hello world');
     });
 
     app.post('/api/record', function (req, res, next) {
         var hash = bcrypt.hashSync(req.body.password, 10);
-        console.log(req.body)
-        console.log('this should be registering');
-        console.log(db.users);
         db.users.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,

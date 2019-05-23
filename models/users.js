@@ -70,8 +70,6 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Users.associate = function(models) {
-        console.log(models)
-        // Users.hasMany(models.newoffers, {foreignKey: 'id', sourceKey: 'id'});
         Users.belongsTo(models.zipcodes, {foreignKey: 'zip', sourceKey: 'zip'}) 
       };
     return Users;
