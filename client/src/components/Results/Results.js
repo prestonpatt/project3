@@ -19,11 +19,14 @@ const style = {
     },
     columns: {
         border: "solid"
+    },
+    PieChart: {
+        textAlign: "center"
     }
 }
 const API_KEY = "s7oiwfsneb0waz";
-const API_KEY2 = ""
-var queryURL = "https://www.numbeo.com/api/indices?api_key=" + API_KEY2 + "&query="
+// const API_KEY2 = ""
+var queryURL = "https://www.numbeo.com/api/indices?api_key=" + API_KEY + "&query="
 
 class Results extends React.Component {
     constructor(props) {
@@ -120,7 +123,7 @@ class Results extends React.Component {
         const currentPayPercentage = 100 - (currentStateTax * 100) - (currentFederalTax * 100);
         const newPayPercentage = 100 - (newStateTax * 100) - (newFederalTax * 100);
         const currentPieChart = [
-            { name: 'Take Home Pay', value: currentPayPercentage },
+            { name: 'Take Home Pay', value: currentPayPercentage},
             { name: 'Federal Tax', value: currentFederalTax * 100},
             { name: 'State Tax', value: currentStateTax * 100},
         ];
@@ -176,7 +179,7 @@ class Results extends React.Component {
 
         return (
             <div style={{ backgroundImage: "url(" + Background1 + ")", overflow: "auto", height: '100vh', width: "100vw", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
-                <Container style={{ backgroundColor: "white" }}>
+                <Container style={{ backgroundColor: "rgba(255, 255, 255, 0.85)", }}>
                     <Row>
                         <Col md={12} style={style.h2}>
                             <h2> Here are your results, {`${this.state.user.firstName}`}</h2>
@@ -190,8 +193,8 @@ class Results extends React.Component {
                                 <li>You pay ${currentFederalTax * currentTotal} right now in federal taxes.</li>
                                 <li>You pay ${currentStateTax * currentTotal} right now in state taxes.</li>
                             </ul>
-                            <PieChart width={400} height={400}>
-                                <Pie dataKey="value" isAnimationActive={false} data={currentPieChart} cx={200} cy={200} outerRadius={80} fill="#07445b" label />
+                            <PieChart style={style.PieChart} width={500} height={500}>
+                                <Pie dataKey="value" isAnimationActive={false} data={currentPieChart} cx={200} cy={200} outerRadius={120} fill="#07445b" label />
                                 <Tooltip />
                             </PieChart>
                         </Col>
@@ -203,14 +206,14 @@ class Results extends React.Component {
                                 <li>You will pay ${newStateTax * newTotal} in state taxes.</li>
                             </ul>
                             <PieChart width={500} height={500}>
-                                <Pie dataKey="value" isAnimationActive={false} data={newPieChart} cx={200} cy={200} outerRadius={80} fill="#e5605c" label />
+                                <Pie dataKey="value" isAnimationActive={false} data={newPieChart} cx={200} cy={200} outerRadius={120} fill="#e5605c" label />
                                 <Tooltip />
                             </PieChart>
                         </Col>
                     </Row>
                     <Row style={style.columns}>
-                        <Col md={8}>
-                            <h4 style={style.h4}>Location Statistics</h4>
+                        <Col md={12}>
+                            <h4 style={style.h4} width={1100}>Location Statistics</h4>
                             <BarChart
                                 width={1100}
                                 height={300}
