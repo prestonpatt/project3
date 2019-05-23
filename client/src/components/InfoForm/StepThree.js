@@ -12,7 +12,7 @@ const style = {
 }
 
 const userSchema = yup.object().shape({
-    newZipCode: yup.number().required(),
+    newZipcode: yup.number().required(),
     newCurrentSalary: yup.number().required(),
     newBonus: yup.number().required(),
     newOtherIncome: yup.number().required()
@@ -23,8 +23,8 @@ class StepThree extends React.Component {
         return (
             <Formik onSubmit={this.props.onSubmit} validationSchema={userSchema}>{() => (
                 <Form>
-                    <ErrorMessage name="newZipCode" component="div" />
-                    <Field type="number" name="newZipCode" placeholder="New Zip Code" style={style.input} />
+                    <ErrorMessage name="newZipcode" component="div" />
+                    <Field type="number" name="newZipcode" placeholder="New Zip Code" style={style.input} />
                     <ErrorMessage name="newCurrentSalary" component="div" />
                     <Field type="number" name="newCurrentSalary" placeholder="New Current Salary $" style={style.input} />
                     <ErrorMessage name="newBonus" component="div" />

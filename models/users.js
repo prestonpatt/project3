@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
         },
         zip: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.BIGINT,
             allowNull: false,
         },
         currentSalary: {
@@ -48,6 +48,22 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        newZipcode: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        newCurrentSalary: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        newBonus: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        newOtherIncome: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
     },
     {
         timestamps: false
@@ -55,7 +71,7 @@ module.exports = function(sequelize, DataTypes) {
 
     Users.associate = function(models) {
         console.log(models)
-        Users.hasMany(models.newoffers, {foreignKey: 'id', sourceKey: 'id'});
+        // Users.hasMany(models.newoffers, {foreignKey: 'id', sourceKey: 'id'});
         Users.belongsTo(models.zipcodes, {foreignKey: 'zip', sourceKey: 'zip'}) 
       };
     return Users;

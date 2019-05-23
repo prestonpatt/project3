@@ -79,14 +79,20 @@ class Results extends React.Component {
                     const user = this.state.user;
                     const newzip = this.state.newzip;
                     const numbeo = this.state.numbeo;
-                    const takeHome = user.currentSalary + user.bonus + user.otherIncome;
-                    const stateTaxRate = newzip.statetaxes ? newzip.statetaxes[0].rate : null;
-                    const federalTaxRate = 0;
-                    const data01 = [
-                        { name: 'Take Home Pay', value: 100 - stateTaxRate }, { name: 'Federal Tax', value: 0 },
-                        { name: 'State Tax', value: stateTaxRate },
+                    const currentTakeHome = user.currentSalary + user.bonus + user.otherIncome;
+                    const stateTaxRate = newzip.statetaxes ? newzip.statetaxes[0].rate  * 100 : null;
+                    const federalTaxRate = 12;
+                    const currentPieChart = [
+                        { name: 'Take Home Pay', value: 100 - stateTaxRate }, { name: 'Federal Tax', value: federalTaxRate },
+                        { name: 'State Tax', value: stateTaxRate},
                     ];
-
+                    const newPieChart = [
+                        { name: 'Take Home Pay', value: 100 - stateTaxRate }, { name: 'Federal Tax', value: federalTaxRate },
+                        { name: 'State Tax', value: stateTaxRate},
+                    ];
+                        console.log(`This is user: ${JSON.stringify(user)}`)
+                        console.log(`This is newzip: ${JSON.stringify(newzip)}`)
+                        console.log(`This is numbeo: ${JSON.stringify(numbeo)}`)
                     const data = [
                         {
                             name: user.firstName, uv: 4000, pv: 2400, amt: 2400,
@@ -123,14 +129,14 @@ class Results extends React.Component {
                     <Col md={6} style={style.columns}>
                         <h1 style={style.h1}>Current Salary</h1>
                         <PieChart width={400} height={400}>
-                            <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={80} fill="red" label />
+                            <Pie dataKey="value" isAnimationActive={false} data={currentPieChart} cx={200} cy={200} outerRadius={80} fill="red" label />
                             <Tooltip />
                         </PieChart>
                     </Col>
                     <Col md={6} style={style.columns}>
                         <h1 style={style.h1}>New Job</h1>
                         <PieChart width={500} height={500}>
-                            <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={80} fill="blue" label />
+                            <Pie dataKey="value" isAnimationActive={false} data={newPieChart} cx={200} cy={200} outerRadius={80} fill="blue" label />
                             <Tooltip />
                         </PieChart>
                     </Col>
@@ -160,7 +166,7 @@ class Results extends React.Component {
                 </Row>
 
 
-            </Container >
+            </Container>
         )
     }
 }
