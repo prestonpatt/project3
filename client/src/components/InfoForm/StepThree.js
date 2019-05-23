@@ -24,13 +24,13 @@ class StepThree extends React.Component {
             <Formik onSubmit={this.props.onSubmit} validationSchema={userSchema}>{() => (
                 <Form>
                     <ErrorMessage name="newZipcode" component="div" />
-                    <Field type="number" name="newZipcode" placeholder="New Zip Code" style={style.input} />
+                    <Field type="number" name="newZipcode" placeholder="New ZIP Code" style={style.input} />
                     <ErrorMessage name="newCurrentSalary" component="div" />
-                    <Field type="number" name="newCurrentSalary" placeholder="New Current Salary $" style={style.input} />
+                    <Field type="number" name="newCurrentSalary" placeholder="New Salary $" style={style.input} />
                     <ErrorMessage name="newBonus" component="div" />
                     <Field type="number" name="newBonus" placeholder="New Bonus $" style={style.input} />
                     <ErrorMessage name="newOtherIncome" component="div" />
-                    <Field type="number" name="newOtherIncome" placeholder="New Other Income" style={style.input} />
+                    <Field type="number" name="newOtherIncome" placeholder="New Additional Income $" style={style.input} />
                     <button type="submit">Submit</button>
                 </Form>
             )}</Formik>

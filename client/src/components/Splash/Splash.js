@@ -45,7 +45,7 @@ class Splash extends React.Component {
                     <Modal opened='true' onClose={this.hideModal} ><Master onFinish={this.hideModal}/></Modal>
                     : null}
                 <div>
-                    <button style={style.button} onClick={this.showModal}>Click here to register</button>
+                    <button style={style.button} onClick={this.showModal}>Click here to register!</button>
                 </div>
             </div>
         )

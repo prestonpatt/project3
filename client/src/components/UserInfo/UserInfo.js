@@ -16,8 +16,6 @@ class UserInfo extends React.Component {
         Axios
             .get(`/api/record/${this.props.match.params.id}`).then((res) => 
                     {if (res) {this.setState({ user: res.data})}
-                    console.log(res.data)
-                    // console.log(this.state)
             })
     }
     

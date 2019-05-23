@@ -14,7 +14,6 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   StateTax.associate = function(models) {
-    console.log(models)
     StateTax.belongsTo(models.zipcodes, {foreignKey: 'stateid', sourceKey: 'stateid'}); 
   };
   return StateTax;

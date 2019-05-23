@@ -36,9 +36,9 @@ class StepOne extends React.Component {
         <ErrorMessage name="lastName" component="div" />
         <Field type="text" name="lastName" placeholder="Last Name" style={style.input} />
         <ErrorMessage name="email" component="div" />
-        <Field type="email" name="email" placeholder="email" style={style.input} />
+        <Field type="email" name="email" placeholder="Email" style={style.input} />
         <ErrorMessage name="password" component="div" />
-        <Field type="password" name="password" placeholder="password" style={style.input} />
+        <Field type="password" name="password" placeholder="Password" style={style.input} />
         <button type="submit">Submit</button>
         </Form>
       )}
