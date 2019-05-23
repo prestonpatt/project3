@@ -32,7 +32,7 @@ module.exports = function (app) {
         where: {
           id: req.params.id
         },
-        include: db.zipcodes
+        include: [db.zipcodes]
         // include: [db.ingredients]
       }).then(function (result) {
         res.json(result);

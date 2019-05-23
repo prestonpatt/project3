@@ -78,6 +78,10 @@ module.exports = function (app) {
             currentSalary: req.body.currentSalary,
             bonus: req.body.bonus,
             otherIncome: req.body.otherIncome,
+            newZipcode: req.body.newZipcode,
+            newCurrentSalary: req.body.newCurrentSalary,
+            newBonus: req.body.newBonus,
+            newOtherIncome: req.body.newOtherIncome,
         }).then(function (result) {
             res.json(result);
         });

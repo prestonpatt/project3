@@ -21,8 +21,10 @@ const style = {
         border: "solid"
     }
 }
-const API_KEY = process.env.NUMBEOKEY
-var queryURL = "http://www.numbeo.com:8008/api/indices?api_key=" + API_KEY + "&query="
+
+const API_KEY = "s7oiwfsneb0waz";
+// var queryURL = "http://www.numbeo.com:8008/api/indices?api_key=" + API_KEY + "&query="
+var queryURL = "https://www.numbeo.com/api/indices?api_key=" + API_KEY + "&query="
 
 class Results extends React.Component {
     constructor(props) {
@@ -30,9 +32,11 @@ class Results extends React.Component {
 
         this.state = {
             user: {},
-            newzip: {},
+            currentLocation: {},
+            newLocation: {},
             federal: {},
-            numbeo: {},
+            currentNumbeo: {},
+            newNumbeo: {},
         }
     }
 
@@ -52,24 +56,39 @@ class Results extends React.Component {
                         if (res) {
                             console.log("This is zipres " + JSON.stringify(res))
                             this.setState({
-                                newzip: res.data
+                                currentLocation: res.data
                             })
-                            console.log(this.state.newzip)
+                            console.log(this.state.currentLocation)
 
                         }
-                        return Axios.get(queryURL + this.state.user.zip.state)
+                        return Axios.get(queryURL + this.state.currentLocation.city.split(' ').join('-'))
                             .then((response) => {
-                                console.log(this.state.user)
+                                console.log(queryURL)
                                 if (response) {
                                     console.log("This is numbeo" + JSON.stringify(response.data))
                                     this.setState({
-                                        numbeo: response.data
+                                        currentNumbeo: response.data
                                     })
                                 }
-                                return Axios.get(`/api/federaltax/`)
+                                return Axios.get(`/api/zip/${this.state.user.newZipcode}`)
+                                    .then((res) => {
+                                        if (res) {
+                                            console.log("This is newzip" + JSON.stringify(res))
+                                            this.setState({
+                                                newLocation: res.data
+                                            })
+                                        }
+                                        return Axios.get(queryURL + this.state.newLocation.city.split(' ').join('-'))
+                                            .then((response) => {
+                                                if (response) {
+                                                    this.setState({
+                                                        newNumbeo: response.data
+                                                    })
+                                                }
+                                            })
+                                    })
                             });
-                    }
-                    )
+                    })
             })
     }
 
@@ -77,37 +96,53 @@ class Results extends React.Component {
 
     render() {
         const user = this.state.user;
-        const newzip = this.state.newzip;
-        const numbeo = this.state.numbeo;
-        const takeHome = user.currentSalary + user.bonus + user.otherIncome;
-        const stateTaxRate = newzip.statetaxes ? newzip.statetaxes[0].rate : null;
-        const federalTaxRate = 0;
-        const data01 = [
-            { name: 'Take Home Pay', value: 100 - stateTaxRate }, { name: 'Federal Tax', value: 0 },
-            { name: 'State Tax', value: stateTaxRate },
+        const currentLocation = this.state.currentLocation;
+        const newLocation = this.state.newLocation;
+        const currentNumbeo = this.state.currentNumbeo;
+        const newNumbeo = this.state.newNumbeo;
+        const currentTakeHome = user.currentSalary + user.bonus + user.otherIncome;
+        const currentStateTax = currentLocation.statetaxes ? currentLocation.statetaxes[0].rate * 100 : null;;
+        const currentFederalTax = 0;
+        const newTakeHome = user.newCurrentSalary + user.newBonus + user.newOtherIncome;
+        const newStateTax = newLocation.statetaxes ? newLocation.statetaxes[0].rate * 100 : null;
+        const newFederalTax = 12;
+        const currentPayPercentage = 100 - currentStateTax - currentFederalTax;
+        const newPayPercentage = 100 - newStateTax - newFederalTax;
+        const currentPieChart = [
+            { name: 'Take Home Pay', value: currentPayPercentage }, { name: 'Federal Tax', value: currentFederalTax },
+            { name: 'State Tax', value: currentStateTax },
+            console.log(currentPayPercentage)
         ];
-
+        const newPieChart = [
+            { name: 'Take Home Pay', value: newPayPercentage }, { name: 'Federal Tax', value: newFederalTax },
+            { name: 'State Tax', value: newStateTax },
+            // console.log(newPayPercentage)
+        ];
+        console.log(newPieChart)
+        console.log(`This is user: ${JSON.stringify(user)}`)
+        console.log(`This is currentLocation: ${JSON.stringify(currentLocation)}`)
+        console.log(`This is numbeo: ${JSON.stringify(currentNumbeo)}`)
         const data = [
             {
-                name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
+                name: 'Consumer Prices', [`${currentLocation.city}`]: currentNumbeo.cpi_index, [`${newLocation.city}`]: newNumbeo.cpi_index, amt: 2400,
             },
             {
-                name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
+                name: 'Rent', [`${currentLocation.city}`]: currentNumbeo.rent_index, [`${newLocation.city}`]: newNumbeo.rent_index, amt: 2210,
             },
             {
-                name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
+                name: 'Groceries', [`${currentLocation.city}`]: currentNumbeo.groceries_index, [`${newLocation.city}`]: newNumbeo.groceries_index, amt: 2290,
             },
             {
-                name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
+                name: 'Purchasing Power', [`${currentLocation.city}`]: currentNumbeo.purchasing_power_incl_rent_index, [`${newLocation.city}`]: newNumbeo.purchasing_power_incl_rent_index, amt: 2000,
             },
             {
-                name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
+                name: 'Health Care', [`${currentLocation.city}`]: currentNumbeo.health_care_index, [`${newLocation.city}`]: newNumbeo.health_care_index, amt: 2181,
             },
             {
-                name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
+                name: 'Crime', [`${currentLocation.city}`]: currentNumbeo.crime_index, [`${newLocation.city}`]: newNumbeo.crime_index, amt: 2500,
             },
             {
-                name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
+                name: 'Pollution', [`${currentLocation.city}`]: currentNumbeo.pollution_index, [`${newLocation.city}`]: newNumbeo.pollution_index, amt: 2100,
             },
         ];
 
@@ -116,30 +151,30 @@ class Results extends React.Component {
                 <Container style={{ backgroundColor: "white" }}>
                     <Row>
                         <Col md={12} style={style.h2}>
-                                <h2> Here are your results, {`${this.state.user.firstName}`}</h2>
+                            <h2> Here are your results, {`${this.state.user.firstName}`}</h2>
                         </Col>
                     </Row>
                     <Row>
                         <Col md={6} style={style.columns}>
                             <h4 style={style.h4}>Current Salary</h4>
                             <PieChart width={400} height={400}>
-                                <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={80} fill="#8884d8" label />
+                                <Pie dataKey="value" isAnimationActive={false} data={currentPieChart} cx={200} cy={200} outerRadius={80} fill="#07445b" label />
                                 <Tooltip />
                             </PieChart>
                         </Col>
                         <Col md={6} style={style.columns}>
                             <h4 style={style.h4}>New Job</h4>
                             <PieChart width={500} height={500}>
-                                <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={80} fill="#82ca9d" label />
+                                <Pie dataKey="value" isAnimationActive={false} data={newPieChart} cx={200} cy={200} outerRadius={80} fill="#e5605c" label />
                                 <Tooltip />
                             </PieChart>
                         </Col>
                     </Row>
                     <Row style={style.columns}>
                         <Col md={8}>
-                            <h4 style={style.h4}>Numbeo Data</h4>
+                            <h4 style={style.h4}>Location Statistics</h4>
                             <BarChart
-                                width={500}
+                                width={1000}
                                 height={300}
                                 data={data}
                                 margin={{
@@ -151,15 +186,15 @@ class Results extends React.Component {
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="uv" fill="#8884d8" />
-                                <Bar dataKey="pv" fill="#82ca9d" />
+                                <Bar dataKey={currentLocation.city}  fill="#07445b" />
+                                <Bar dataKey={newLocation.city}  fill="#e5605c" />
                             </BarChart>
                         </Col>
                         <Col md={4}>
                             <h4 style={style.h4}>Text will Go here</h4>
                         </Col>
                     </Row>
-                </Container >
+                </Container>
             </div>
         )
     }
