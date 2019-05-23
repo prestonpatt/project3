@@ -100,12 +100,30 @@ class Results extends React.Component {
         const newLocation = this.state.newLocation;
         const currentNumbeo = this.state.currentNumbeo;
         const newNumbeo = this.state.newNumbeo;
-        const currentTakeHome = user.currentSalary + user.bonus + user.otherIncome;
+        const currentTotal = user.currentSalary + user.bonus + user.otherIncome;
         const currentStateTax = currentLocation.statetaxes ? currentLocation.statetaxes[0].rate * 100 : null;;
-        const currentFederalTax = 0;
-        const newTakeHome = user.newCurrentSalary + user.newBonus + user.newOtherIncome;
+        let FederalTax = function fedRate(totalIncome) {
+            if (totalIncome <= 9525) {
+                return 0.1;
+            } else if (totalIncome <= 38700) {
+                return 0.12;
+            } else if (totalIncome <= 82500) {
+                return 0.22;
+            } else if (totalIncome <= 157500) {
+                return 0.24;
+            } else if (totalIncome <= 200000) {
+                return 0.32;
+            } else if (totalIncome <= 500000) {
+                return 0.35;
+            } else if (totalIncome >= 500001) {
+                return 0.37;
+            } 
+        };
+        const currentFederalTax = FederalTax(currentTotal);
+        console.log(currentFederalTax)
+        const newTotal = user.newCurrentSalary + user.newBonus + user.newOtherIncome;
         const newStateTax = newLocation.statetaxes ? newLocation.statetaxes[0].rate * 100 : null;
-        const newFederalTax = 12;
+        const newFederalTax = 2;
         const currentPayPercentage = 100 - currentStateTax - currentFederalTax;
         const newPayPercentage = 100 - newStateTax - newFederalTax;
         const currentPieChart = [
@@ -124,25 +142,25 @@ class Results extends React.Component {
         console.log(`This is numbeo: ${JSON.stringify(currentNumbeo)}`)
         const data = [
             {
-                name: 'Consumer Prices', [`${currentLocation.city}`]: currentNumbeo.cpi_index, [`${newLocation.city}`]: newNumbeo.cpi_index, amt: 2400,
+                name: 'Consumer Prices', [`${currentLocation.city}`]: Math.round(currentNumbeo.cpi_index * 100) / 100, [`${newLocation.city}`]: Math.round(newNumbeo.cpi_index * 100) / 100, amt: 2400,
             },
             {
-                name: 'Rent', [`${currentLocation.city}`]: currentNumbeo.rent_index, [`${newLocation.city}`]: newNumbeo.rent_index, amt: 2210,
+                name: 'Rent', [`${currentLocation.city}`]: Math.round(currentNumbeo.rent_index * 100) / 100, [`${newLocation.city}`]: Math.round(newNumbeo.rent_index * 100) / 100, amt: 2210,
             },
             {
-                name: 'Groceries', [`${currentLocation.city}`]: currentNumbeo.groceries_index, [`${newLocation.city}`]: newNumbeo.groceries_index, amt: 2290,
+                name: 'Groceries', [`${currentLocation.city}`]: Math.round(currentNumbeo.groceries_index * 100) / 100, [`${newLocation.city}`]: Math.round(newNumbeo.groceries_index * 100) / 100, amt: 2290,
             },
             {
-                name: 'Purchasing Power', [`${currentLocation.city}`]: currentNumbeo.purchasing_power_incl_rent_index, [`${newLocation.city}`]: newNumbeo.purchasing_power_incl_rent_index, amt: 2000,
+                name: 'Purchasing Power', [`${currentLocation.city}`]: Math.round(currentNumbeo.purchasing_power_incl_rent_index * 100) / 100, [`${newLocation.city}`]: Math.round(newNumbeo.purchasing_power_incl_rent_index * 100) / 100, amt: 2000,
             },
             {
-                name: 'Health Care', [`${currentLocation.city}`]: currentNumbeo.health_care_index, [`${newLocation.city}`]: newNumbeo.health_care_index, amt: 2181,
+                name: 'Health Care', [`${currentLocation.city}`]: Math.round(currentNumbeo.health_care_index * 100) / 100, [`${newLocation.city}`]: Math.round(newNumbeo.health_care_index * 100) / 100, amt: 2181,
             },
             {
-                name: 'Crime', [`${currentLocation.city}`]: currentNumbeo.crime_index, [`${newLocation.city}`]: newNumbeo.crime_index, amt: 2500,
+                name: 'Crime', [`${currentLocation.city}`]: Math.round(currentNumbeo.crime_index * 100) / 100, [`${newLocation.city}`]: Math.round(newNumbeo.crime_index * 100) / 100, amt: 2500,
             },
             {
-                name: 'Pollution', [`${currentLocation.city}`]: currentNumbeo.pollution_index, [`${newLocation.city}`]: newNumbeo.pollution_index, amt: 2100,
+                name: 'Pollution', [`${currentLocation.city}`]: Math.round(currentNumbeo.pollution_index * 100) / 100, [`${newLocation.city}`]: Math.round(newNumbeo.pollution_index * 100) / 100, amt: 2100,
             },
         ];
 
@@ -158,9 +176,9 @@ class Results extends React.Component {
                         <Col md={6} style={style.columns}>
                             <h4 style={style.h4}>Current Salary</h4>
                             <ul>
-                                <li>Your take home pay is: {}</li>
-                                <li>You’ll pay {} federal taxes</li>
-                                <li>You’ll pay {} state taxes</li>
+                                <li>Your take home pay is: ${currentTotal}</li>
+                                <li>You’ll pay ${} in federal taxes</li>
+                                <li>You’ll pay ${} in state taxes</li>
                             </ul>
                             <PieChart width={400} height={400}>
                                 <Pie dataKey="value" isAnimationActive={false} data={currentPieChart} cx={200} cy={200} outerRadius={80} fill="#07445b" label />
@@ -170,9 +188,9 @@ class Results extends React.Component {
                         <Col md={6} style={style.columns}>
                             <h4 style={style.h4}>New Job</h4>
                             <ul>
-                                <li>Your take home pay is: {}</li>
-                                <li>You’ll pay {} federal taxes</li>
-                                <li>You’ll pay {} state taxes</li>
+                                <li>Your new take home pay is: ${newTotal}</li>
+                                <li>You’ll pay ${} federal taxes</li>
+                                <li>You’ll pay ${} state taxes</li>
                             </ul>
                             <PieChart width={500} height={500}>
                                 <Pie dataKey="value" isAnimationActive={false} data={newPieChart} cx={200} cy={200} outerRadius={80} fill="#e5605c" label />
@@ -193,7 +211,7 @@ class Results extends React.Component {
                             >
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="name" />
-                                <YAxis type="number" domain={[0, 'dataMax']} />
+                                <YAxis type="number" domain={[0, 225]} />
                                 <Tooltip />
                                 <Legend />
                                 <Bar dataKey={currentLocation.city}  fill="#07445b" />
